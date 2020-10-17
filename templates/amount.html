@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Amount
+{% endblock title %}
+ <script>
+ num1=number({{weight}})
+
+ document.getElementById("q").innerHTML = string(num1*50 +150);
+ 
+ </script>
+
+{% block body %}
+
+
+<div class ="container py-4 d-inline">
+
+<div class ="col-lg-offset-12 col-lg-4  d-inline-block">
+<div class= "panel panel-default">
+<div class ="panel-body">
+
+<form method = "post" {% if request.user.is_anonymous %}action ="/login" {% else %}action = "/payment"{% endif %}>
+ {% csrf_token %}
+ 
+ <h2>Total Amount To Pay</h2>
+  <div class="form-group">
+  
+  <label for="weight">Weight:</label>
+    <input name= "weight" class="form-control" id="exampleFormControlInput1" placeholder="Weight of parsel" disabled value={{weight}}>
+  </div>
+  <div class="form-group ">
+    <label for="b_cost">Base Cost:</label>
+    <input name ="base_cost" class="form-control" id="exampleFormControlInput2" placeholder="base Cost" disabled value = "150">
+  </div>
+  <div class="form-group ">
+   <label for="Distance_charge">Distance Charge:</label>
+    <input name ="d_charge" class="form-control" id="exampleFormControlInput3" placeholder="Distance charge"disabled value = "50Rs/km">
+    
+  </div>
+  <div class="form-group">
+  <label for="S_product">Secure Product:</label>
+    <input name="s_product" class="form-control" id="exampleFormControlInput4" placeholder="Secure Product"disabled>
+
+   </div>
+   <div class="form-group">
+   <label for="t_amount">Total Amount:</label>
+   
+    <input name= "t_amount" class="form-control" id="exampleFormControlInput10" placeholder="Total Amount"disabled >
+    
+
+
+
+   </div>
+  <button type="submit" class="btn btn-primary">Continue</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+<h1 id="q"></h1>
+
+{% endblock body %}
